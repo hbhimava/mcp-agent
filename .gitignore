@@ -1,0 +1,61 @@
+# --- Python -----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+
+# --- Virtual environments ---------------------------------------------------
+# uv creates `.venv/` by default. Never commit this.
+.venv/
+venv/
+env/
+ENV/
+
+# --- uv ---------------------------------------------------------------------
+# DO commit uv.lock — it's how others reproduce your exact dep versions.
+# This file appears here only as a reminder NOT to add it to .gitignore.
+# (No actual rule needed; it's tracked by default.)
+
+# --- Secrets ----------------------------------------------------------------
+# .env contains API keys. .env.example is a committed template with no secrets.
+.env
+.env.local
+.env.*.local
+
+# --- Testing & coverage -----------------------------------------------------
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+
+# --- Linting / type checking ------------------------------------------------
+.ruff_cache/
+.mypy_cache/
+
+# --- IDE --------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- OS ---------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+
+# --- Project-specific -------------------------------------------------------
+# Eval results, run logs — generated artifacts, not source.
+evals/results/
+*.log

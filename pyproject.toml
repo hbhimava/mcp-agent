@@ -1,0 +1,79 @@
+[project]
+name = "mcp-agent"
+version = "0.1.0"
+description = "A model-agnostic agent that uses Model Context Protocol (MCP) for all tool calling. Stage 1 of a multi-stage GenAI portfolio project."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
+authors = [
+    { name = "Hemanth Kumar Reddy Bhimavarapu", email = "hemanth.bhimavarapu28@gmail.com" }
+]
+keywords = ["mcp", "model-context-protocol", "agent", "llm", "openai", "anthropic"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+# Runtime dependencies.
+# `~=` is PEP 440 "compatible release": ~=1.27 means >=1.27, <2.0.
+# This lets us pick up patch and minor updates but never a breaking major.
+dependencies = [
+    "mcp ~= 1.27",            # Official MCP Python SDK (v1.x stable; v2 is pre-alpha).
+    "openai ~= 2.38",         # OpenAI Python SDK (current major as of May 2026).
+    "python-dotenv ~= 1.0",   # Loads .env into os.environ. Same as docs-rag.
+    "pydantic ~= 2.9",        # Used by MCP SDK internally + we'll use it for typed configs.
+]
+
+[project.optional-dependencies]
+# Dev tools. Installed with `uv sync --extra dev` or `uv pip install -e ".[dev]"`.
+dev = [
+    "pytest ~= 8.3",
+    "pytest-asyncio ~= 0.24",  # Required because MCP is async-first.
+    "ruff ~= 0.7",             # Lint + format, same toolchain as docs-rag.
+]
+
+[project.scripts]
+# Entry point: after `uv pip install -e .`, the shell command `mcp-agent` will
+# call `main()` from `src/mcp_agent/__init__.py`. We'll move this to cli.py later.
+mcp-agent = "mcp_agent:main"
+
+[project.urls]
+Repository = "https://github.com/hbhimava/mcp-agent"
+Issues = "https://github.com/hbhimava/mcp-agent/issues"
+
+[build-system]
+requires = ["uv_build>=0.11.14,<0.12.0"]
+build-backend = "uv_build"
+
+# ---------------------------------------------------------------------------
+# Tool configurations. Keeping them in pyproject.toml (rather than separate
+# .ruff.toml, pytest.ini files) is the modern convention — one file to rule
+# them all.
+# ---------------------------------------------------------------------------
+
+[tool.ruff]
+# Match docs-rag style. Line length 100 is a reasonable middle ground
+# between PEP 8's 79 (cramped for modern screens) and Black's 88.
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+# Selected rule families:
+#   E, W   = pycodestyle errors/warnings (PEP 8)
+#   F      = pyflakes (unused imports, undefined names, etc.)
+#   I      = isort (import ordering)
+#   UP     = pyupgrade (use modern Python syntax)
+#   B      = flake8-bugbear (likely bugs)
+#   SIM    = flake8-simplify (idiomatic simplifications)
+select = ["E", "W", "F", "I", "UP", "B", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# asyncio_mode = "auto" means we don't need to decorate every async test
+# with @pytest.mark.asyncio. Just `async def test_foo(): ...` works.
+asyncio_mode = "auto"
+
