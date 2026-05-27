@@ -104,10 +104,7 @@ async def main() -> None:
         #
         # Until `initialize()` completes, you can't make any other calls.
         init_result = await session.initialize()
-        print(
-            f"✓ Connected to: {init_result.serverInfo.name} "
-            f"v{init_result.serverInfo.version}"
-        )
+        print(f"✓ Connected to: {init_result.serverInfo.name} v{init_result.serverInfo.version}")
         print(f"  Protocol version: {init_result.protocolVersion}\n")
 
         # ---- Step 4: list tools -------------------------------------

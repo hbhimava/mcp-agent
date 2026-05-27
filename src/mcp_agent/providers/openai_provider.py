@@ -163,9 +163,7 @@ class OpenAIProvider(Provider):
                     # the raw string so the agent loop can decide whether
                     # to retry, fail, or feed the error back to the model.
                     args = {"__raw_arguments__": tc.function.arguments}
-                tool_calls.append(
-                    ToolCall(id=tc.id, name=tc.function.name, arguments=args)
-                )
+                tool_calls.append(ToolCall(id=tc.id, name=tc.function.name, arguments=args))
 
         # Normalize finish_reason.
         raw_reason = choice.finish_reason

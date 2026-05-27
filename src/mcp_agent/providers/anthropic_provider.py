@@ -56,9 +56,7 @@ class AnthropicProvider(Provider):
         # We deliberately accept (and remember) the same arguments the real
         # implementation will need, so callers wiring up providers don't have
         # to change their code when the stub becomes real.
-        self.model = model or os.environ.get(
-            "MCP_AGENT_ANTHROPIC_MODEL", "claude-sonnet-4-5"
-        )
+        self.model = model or os.environ.get("MCP_AGENT_ANTHROPIC_MODEL", "claude-sonnet-4-5")
         self._api_key = api_key  # not used yet; stored for future _client init
 
     async def chat(
