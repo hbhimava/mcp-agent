@@ -22,7 +22,7 @@ Before MCP, every agent framework reinvented "how does an LLM call a tool." MCP 
 
 | Phase | Description | State |
 |-------|-------------|-------|
-| 1 | Scaffold, MCP concepts, hello-world client, provider abstraction | 🚧 In progress |
+| 1 | Scaffold, MCP concepts, hello-world client, provider abstraction | ✅ Done |
 | 2 | Naive agent → real loop with iteration + parallel tool calls → streaming + CLI | ⏳ Planned |
 | 3 | Custom MCP server wrapping `docs-rag` | ⏳ Planned |
 | 4 | Eval harness, comparison metrics, README polish | ⏳ Planned |
